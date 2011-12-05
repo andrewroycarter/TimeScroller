@@ -18,14 +18,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D0C86AAF148C638200F81AB3 /* TimerScroller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimerScroller.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0C86AAF148C638200F81AB3 /* TimeScroller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeScroller.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0C86AB3148C638200F81AB3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D0C86AB5148C638200F81AB3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D0C86AB7148C638200F81AB3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		D0C86ABB148C638200F81AB3 /* TimerScroller-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TimerScroller-Info.plist"; sourceTree = "<group>"; };
+		D0C86ABB148C638200F81AB3 /* TimeScroller-Info.plist */ = {isa = PBXFileReference; path = "TimeScroller-Info.plist"; sourceTree = "<group>"; };
 		D0C86ABD148C638200F81AB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D0C86ABF148C638200F81AB3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D0C86AC1148C638200F81AB3 /* TimerScroller-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TimerScroller-Prefix.pch"; sourceTree = "<group>"; };
+		D0C86AC1148C638200F81AB3 /* TimeScroller-Prefix.pch */ = {isa = PBXFileReference; path = "TimeScroller-Prefix.pch"; sourceTree = "<group>"; };
 		D0C86AC2148C638200F81AB3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D0C86AC3148C638200F81AB3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D0C86ACD148C63B900F81AB3 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -51,7 +51,7 @@
 		D0C86AA4148C638200F81AB3 = {
 			isa = PBXGroup;
 			children = (
-				D0C86AB9148C638200F81AB3 /* TimerScroller */,
+				D0C86AB9148C638200F81AB3 /* TimeScroller */,
 				D0C86AB2148C638200F81AB3 /* Frameworks */,
 				D0C86AB0148C638200F81AB3 /* Products */,
 			);
@@ -60,7 +60,7 @@
 		D0C86AB0148C638200F81AB3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D0C86AAF148C638200F81AB3 /* TimerScroller.app */,
+				D0C86AAF148C638200F81AB3 /* TimeScroller.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -75,7 +75,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D0C86AB9148C638200F81AB3 /* TimerScroller */ = {
+		D0C86AB9148C638200F81AB3 /* TimeScroller */ = {
 			isa = PBXGroup;
 			children = (
 				D0C86ACC148C639C00F81AB3 /* RootViewController */,
@@ -83,16 +83,17 @@
 				D0C86ACA148C638B00F81AB3 /* Application Delegate */,
 				D0C86ABA148C638200F81AB3 /* Supporting Files */,
 			);
+			name = TimeScroller;
 			path = TimerScroller;
 			sourceTree = "<group>";
 		};
 		D0C86ABA148C638200F81AB3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D0C86ABB148C638200F81AB3 /* TimerScroller-Info.plist */,
+				D0C86ABB148C638200F81AB3 /* TimeScroller-Info.plist */,
 				D0C86ABC148C638200F81AB3 /* InfoPlist.strings */,
 				D0C86ABF148C638200F81AB3 /* main.m */,
-				D0C86AC1148C638200F81AB3 /* TimerScroller-Prefix.pch */,
+				D0C86AC1148C638200F81AB3 /* TimeScroller-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -127,9 +128,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D0C86AAE148C638200F81AB3 /* TimerScroller */ = {
+		D0C86AAE148C638200F81AB3 /* TimeScroller */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D0C86AC7148C638200F81AB3 /* Build configuration list for PBXNativeTarget "TimerScroller" */;
+			buildConfigurationList = D0C86AC7148C638200F81AB3 /* Build configuration list for PBXNativeTarget "TimeScroller" */;
 			buildPhases = (
 				D0C86AAB148C638200F81AB3 /* Sources */,
 				D0C86AAC148C638200F81AB3 /* Frameworks */,
@@ -139,9 +140,9 @@
 			);
 			dependencies = (
 			);
-			name = TimerScroller;
+			name = TimeScroller;
 			productName = TimerScroller;
-			productReference = D0C86AAF148C638200F81AB3 /* TimerScroller.app */;
+			productReference = D0C86AAF148C638200F81AB3 /* TimeScroller.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -152,7 +153,7 @@
 			attributes = {
 				LastUpgradeCheck = 0420;
 			};
-			buildConfigurationList = D0C86AA9148C638200F81AB3 /* Build configuration list for PBXProject "TimerScroller" */;
+			buildConfigurationList = D0C86AA9148C638200F81AB3 /* Build configuration list for PBXProject "TimeScroller" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -164,7 +165,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D0C86AAE148C638200F81AB3 /* TimerScroller */,
+				D0C86AAE148C638200F81AB3 /* TimeScroller */,
 			);
 		};
 /* End PBXProject section */
@@ -260,10 +261,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TimerScroller/TimerScroller-Prefix.pch";
+				GCC_PREFIX_HEADER = "TimerScroller/TimeScroller-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = "TimerScroller/TimerScroller-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "TimerScroller/TimeScroller-Info.plist";
+				PRODUCT_NAME = TimeScroller;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
@@ -274,10 +275,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TimerScroller/TimerScroller-Prefix.pch";
+				GCC_PREFIX_HEADER = "TimerScroller/TimeScroller-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = "TimerScroller/TimerScroller-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "TimerScroller/TimeScroller-Info.plist";
+				PRODUCT_NAME = TimeScroller;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -285,7 +286,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D0C86AA9148C638200F81AB3 /* Build configuration list for PBXProject "TimerScroller" */ = {
+		D0C86AA9148C638200F81AB3 /* Build configuration list for PBXProject "TimeScroller" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D0C86AC5148C638200F81AB3 /* Debug */,
@@ -294,7 +295,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D0C86AC7148C638200F81AB3 /* Build configuration list for PBXNativeTarget "TimerScroller" */ = {
+		D0C86AC7148C638200F81AB3 /* Build configuration list for PBXNativeTarget "TimeScroller" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D0C86AC8148C638200F81AB3 /* Debug */,

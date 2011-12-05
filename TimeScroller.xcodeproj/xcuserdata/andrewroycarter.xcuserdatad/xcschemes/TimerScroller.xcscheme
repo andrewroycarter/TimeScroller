@@ -14,9 +14,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D0C86AAE148C638200F81AB3"
-               BuildableName = "TimerScroller.app"
-               BlueprintName = "TimerScroller"
-               ReferencedContainer = "container:TimerScroller.xcodeproj">
+               BuildableName = "TimeScroller.app"
+               BlueprintName = "TimeScroller"
+               ReferencedContainer = "container:TimeScroller.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,9 +32,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D0C86AAE148C638200F81AB3"
-            BuildableName = "TimerScroller.app"
-            BlueprintName = "TimerScroller"
-            ReferencedContainer = "container:TimerScroller.xcodeproj">
+            BuildableName = "TimeScroller.app"
+            BlueprintName = "TimeScroller"
+            ReferencedContainer = "container:TimeScroller.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -50,9 +50,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D0C86AAE148C638200F81AB3"
-            BuildableName = "TimerScroller.app"
-            BlueprintName = "TimerScroller"
-            ReferencedContainer = "container:TimerScroller.xcodeproj">
+            BuildableName = "TimeScroller.app"
+            BlueprintName = "TimeScroller"
+            ReferencedContainer = "container:TimeScroller.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -68,9 +68,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D0C86AAE148C638200F81AB3"
-            BuildableName = "TimerScroller.app"
-            BlueprintName = "TimerScroller"
-            ReferencedContainer = "container:TimerScroller.xcodeproj">
+            BuildableName = "TimeScroller.app"
+            BlueprintName = "TimeScroller"
+            ReferencedContainer = "container:TimeScroller.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

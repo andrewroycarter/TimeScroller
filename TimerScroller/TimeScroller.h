@@ -15,6 +15,7 @@
 @required
 
 - (UITableView *)tableViewForTimeScroller:(TimeScroller *)timeScroller;
+- (NSDate *)dateForCell:(UITableViewCell *)cell;
 
 @end
 
@@ -23,6 +24,7 @@
     id <TimeScrollerDelegate> _delegate;
     UITableView *_tableView;
     UIImageView *_scrollBar;
+    UILabel *_dateLabel;
 
 }
 
@@ -30,5 +32,8 @@
 
 - (id)initWithDelegate:(id <TimeScrollerDelegate>)delegate;
 - (void)scrollViewDidScroll;
+- (void)scrollViewDidEndDecelerating;
+- (void)scrollViewWillBeginDragging;
+- (void)updateDisplayWithCell:(UITableViewCell *)cell;
 
 @end

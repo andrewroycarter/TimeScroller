@@ -12,7 +12,7 @@
 
 @interface RootViewController : UIViewController <UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, TimeScrollerDelegate> {
 
-    IBOutlet UITableView *_tableView;
+    UITableView *_tableView;
     NSMutableArray *_datasource;
     TimeScroller *_timeScroller;
     

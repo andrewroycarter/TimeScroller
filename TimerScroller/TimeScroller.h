@@ -21,6 +21,7 @@
 
 @interface TimeScroller : UIView {
 
+    @protected
     id <TimeScrollerDelegate> _delegate;
     UITableView *_tableView;
     UIImageView *_scrollBar;
@@ -34,6 +35,5 @@
 - (void)scrollViewDidScroll;
 - (void)scrollViewDidEndDecelerating;
 - (void)scrollViewWillBeginDragging;
-- (void)updateDisplayWithCell:(UITableViewCell *)cell;
 
 @end

@@ -14,7 +14,6 @@
 		D0C86AC0148C638200F81AB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C86ABF148C638200F81AB3 /* main.m */; };
 		D0C86AC4148C638200F81AB3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C86AC3148C638200F81AB3 /* AppDelegate.m */; };
 		D0C86AD0148C63B900F81AB3 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C86ACE148C63B900F81AB3 /* RootViewController.m */; };
-		D0C86AD1148C63B900F81AB3 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0C86ACF148C63B900F81AB3 /* RootViewController.xib */; };
 		D0C86AD4148C64F000F81AB3 /* TimeScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C86AD3148C64F000F81AB3 /* TimeScroller.m */; };
 /* End PBXBuildFile section */
 
@@ -31,7 +30,6 @@
 		D0C86AC3148C638200F81AB3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D0C86ACD148C63B900F81AB3 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		D0C86ACE148C63B900F81AB3 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		D0C86ACF148C63B900F81AB3 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		D0C86AD2148C64F000F81AB3 /* TimeScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeScroller.h; sourceTree = "<group>"; };
 		D0C86AD3148C64F000F81AB3 /* TimeScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeScroller.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,7 +120,6 @@
 			children = (
 				D0C86ACD148C63B900F81AB3 /* RootViewController.h */,
 				D0C86ACE148C63B900F81AB3 /* RootViewController.m */,
-				D0C86ACF148C63B900F81AB3 /* RootViewController.xib */,
 			);
 			name = RootViewController;
 			sourceTree = "<group>";
@@ -178,7 +175,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0C86ABE148C638200F81AB3 /* InfoPlist.strings in Resources */,
-				D0C86AD1148C63B900F81AB3 /* RootViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

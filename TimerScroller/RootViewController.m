@@ -16,17 +16,20 @@
     
     if (self) {
         
+        //There is no need to add the TimeScroller as a subview.
+        _timeScroller = [[TimeScroller alloc] initWithDelegate:self];
+        
+        //This is just junk data to be displayed.
         _datasource = [NSMutableArray new];
+        
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *components = [[NSDateComponents alloc] init];
         
         for (int i = 0; i < 30; i++) {
             
             NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
             [dictionary setObject:@"Title here" forKey:@"title"];
-            [_datasource addObject:dictionary];
-
-            NSCalendar *calendar = [NSCalendar currentCalendar];
             
-            NSDateComponents *components = [[NSDateComponents alloc] init];
             components.year = 2011;
             components.month = 10;
             components.day = i;
@@ -34,7 +37,15 @@
             NSDate *date = [calendar dateFromComponents:components];
             [dictionary setObject:date forKey:@"date"];
             
+            [_datasource addObject:dictionary];
+            
         }
+        
+        [components release];
+        
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 416.0f) style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
         
     }
 
@@ -43,33 +54,36 @@
 
 - (void)dealloc {
     
+    [_tableView release];
+    [_timeScroller release];
     [_datasource release];
     
     [super dealloc];
 
 }
 
-- (void)viewDidLoad {
-
-    _timeScroller = [[TimeScroller alloc] initWithDelegate:self];
-    [self.view addSubview:_timeScroller];
-    [_timeScroller release];
-
-}
-
-- (void)viewDidAppear:(BOOL)animated {
+- (void)loadView {
     
-    NSLog(@"lol");
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 416.0f)];
+    
+    [view addSubview:_tableView];
+    
+    self.view = view;
+    [view release];
+    
 }
 
 #pragma mark TimeScrollerDelegate Methods
 
+//You should return your UITableView here
 - (UITableView *)tableViewForTimeScroller:(TimeScroller *)timeScroller {
 
     return _tableView;
 
 }
 
+//You should return an NSDate related to the UITableViewCell given. This will be
+//the date displayed when the TimeScroller is above that cell.
 - (NSDate *)dateForCell:(UITableViewCell *)cell {
     
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
@@ -82,6 +96,8 @@
 
 #pragma mark UIScrollViewDelegateMethods
 
+
+//The TimeScroller needs to know what's happening with the UITableView (UIScrollView)
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     [_timeScroller scrollViewDidScroll];

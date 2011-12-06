@@ -29,30 +29,38 @@
 
 - (id)initWithDelegate:(id<TimeScrollerDelegate>)delegate {
     
-    self = [super initWithFrame:CGRectMake(0.0f, 0.0f, 70.0f, 30.0f)];
+    UIImage *background = [[UIImage imageNamed:@"timescroll_pointer"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0f, 35.0f, 0.0f, 10.0f)];
+    
+    self = [super initWithImage:background];
     if (self) {
-        
-        
-        self.clipsToBounds = YES;
-        self.layer.cornerRadius = 6.0f;
+                
+        self.frame = CGRectMake(0.0f, 0.0f, 80.0f, CGRectGetHeight(self.frame));
         self.alpha = 0.0f;
         self.transform = CGAffineTransformMakeTranslation(abs(kDistanceFromEdgeOfTableView), 0.0f);
-        self.layer.borderColor = [[UIColor darkGrayColor] CGColor];
-        self.layer.borderWidth = 1.0f;
         
-        _delegate = delegate;
-        self.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.8];
-        _dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 70.0f, 30.0f)];
-        _dateLabel.textColor = [UIColor whiteColor];
-        _dateLabel.backgroundColor = [UIColor clearColor];
-        _dateLabel.textAlignment = UITextAlignmentCenter;
-        _dateLabel.adjustsFontSizeToFitWidth = YES;
-        _dateLabel.font = [UIFont fontWithName:@"Helvetica" size:14.0f];
-        _dateLabel.minimumFontSize = 12.0f;
+        _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(30.0f, 4.0f, 50.0f, 20.0f)];
+        _timeLabel.textColor = [UIColor whiteColor];
+        _timeLabel.shadowColor = [UIColor blackColor];
+        _timeLabel.shadowOffset = CGSizeMake(-0.5f, -0.5f);
+        _timeLabel.text = @"6:00 PM";
+        _timeLabel.backgroundColor = [UIColor clearColor];
+        _timeLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:9.0f];
+        _timeLabel.autoresizingMask = UIViewAutoresizingNone;
+        [self addSubview:_timeLabel];
+        [_timeLabel release];
+        
+        _dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(30.0f, 9.0f, 100.0f, 20.0f)];
+        _dateLabel.textColor = [UIColor colorWithRed:179.0f green:179.0f blue:179.0f alpha:0.60f];
         _dateLabel.shadowColor = [UIColor blackColor];
-        _dateLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
+        _dateLabel.shadowOffset = CGSizeMake(-0.5f, -0.5f);
+        _dateLabel.text = @"6:00 PM";
+        _dateLabel.backgroundColor = [UIColor clearColor];
+        _dateLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:9.0f];
+        _dateLabel.alpha = 0.0f;
         [self addSubview:_dateLabel];
         [_dateLabel release];
+        
+        _delegate = delegate;
         
     }
     
@@ -85,11 +93,45 @@
 - (void)updateDisplayWithCell:(UITableViewCell *)cell {
     
     NSDate *date = [self.delegate dateForCell:cell];
+    NSDate *today = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *dateComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:date];
+    NSDateComponents *todayComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:today];
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-    _dateLabel.text = [dateFormatter stringFromDate:date];
-    [dateFormatter release];
+    if (dateComponents.year == todayComponents.year && dateComponents.month == todayComponents.month && dateComponents.day == todayComponents.day) {
+
+        _dateLabel.text = @"";
+
+        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseOut animations:^{
+
+            self.frame = CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame), 80.0f, CGRectGetHeight(self.frame));
+            _timeLabel.frame = CGRectMake(30.0f, 4.0f, 100.0f, 20.0f);
+            _dateLabel.alpha = 0.0f;
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+    } else {
+    
+        [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseOut animations:^{
+            
+            _timeLabel.frame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);
+            
+            if (dateComponents.year == todayComponents.year && dateComponents.weekOfYear == todayComponents.weekOfYear && dateComponents.day + 1 == todayComponents.day) {
+                
+                _dateLabel.text = @"Yesterday";
+                _dateLabel.alpha = 1.0f;
+                self.frame = CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame), 85.0f, CGRectGetHeight(self.frame));
+                
+            }
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    
+    }
+    
     
 }
 

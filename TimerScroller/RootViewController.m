@@ -25,13 +25,13 @@
         NSCalendar *calendar = [NSCalendar currentCalendar];
         NSDateComponents *components = [[NSDateComponents alloc] init];
         
-        for (int i = 0; i < 30; i++) {
+        for (int i = 6; i >= -15; i--) {
             
             NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
             [dictionary setObject:@"Title here" forKey:@"title"];
             
             components.year = 2011;
-            components.month = 10;
+            components.month = 12;
             components.day = i;
             
             NSDate *date = [calendar dateFromComponents:components];

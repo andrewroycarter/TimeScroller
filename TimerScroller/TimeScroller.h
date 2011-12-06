@@ -19,14 +19,14 @@
 
 @end
 
-@interface TimeScroller : UIView {
+@interface TimeScroller : UIImageView {
 
     @protected
     id <TimeScrollerDelegate> _delegate;
     UITableView *_tableView;
     UIImageView *_scrollBar;
+    UILabel *_timeLabel;
     UILabel *_dateLabel;
-
 }
 
 @property (nonatomic, assign) id <TimeScrollerDelegate> delegate;

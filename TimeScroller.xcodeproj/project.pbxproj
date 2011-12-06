@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D07C3BF8148DD6A300B8699E /* timescroll_hourhand.png in Resources */ = {isa = PBXBuildFile; fileRef = D07C3BF2148DD6A300B8699E /* timescroll_hourhand.png */; };
+		D07C3BF9148DD6A300B8699E /* timescroll_hourhand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D07C3BF3148DD6A300B8699E /* timescroll_hourhand@2x.png */; };
+		D07C3BFA148DD6A300B8699E /* timescroll_minutehand.png in Resources */ = {isa = PBXBuildFile; fileRef = D07C3BF4148DD6A300B8699E /* timescroll_minutehand.png */; };
+		D07C3BFB148DD6A300B8699E /* timescroll_minutehand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D07C3BF5148DD6A300B8699E /* timescroll_minutehand@2x.png */; };
+		D07C3BFC148DD6A300B8699E /* timescroll_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = D07C3BF6148DD6A300B8699E /* timescroll_pointer.png */; };
+		D07C3BFD148DD6A300B8699E /* timescroll_pointer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D07C3BF7148DD6A300B8699E /* timescroll_pointer@2x.png */; };
 		D0C86AB4148C638200F81AB3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C86AB3148C638200F81AB3 /* UIKit.framework */; };
 		D0C86AB6148C638200F81AB3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C86AB5148C638200F81AB3 /* Foundation.framework */; };
 		D0C86AB8148C638200F81AB3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C86AB7148C638200F81AB3 /* CoreGraphics.framework */; };
@@ -18,14 +24,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D07C3BF2148DD6A300B8699E /* timescroll_hourhand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timescroll_hourhand.png; sourceTree = "<group>"; };
+		D07C3BF3148DD6A300B8699E /* timescroll_hourhand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timescroll_hourhand@2x.png"; sourceTree = "<group>"; };
+		D07C3BF4148DD6A300B8699E /* timescroll_minutehand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timescroll_minutehand.png; sourceTree = "<group>"; };
+		D07C3BF5148DD6A300B8699E /* timescroll_minutehand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timescroll_minutehand@2x.png"; sourceTree = "<group>"; };
+		D07C3BF6148DD6A300B8699E /* timescroll_pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timescroll_pointer.png; sourceTree = "<group>"; };
+		D07C3BF7148DD6A300B8699E /* timescroll_pointer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timescroll_pointer@2x.png"; sourceTree = "<group>"; };
 		D0C86AAF148C638200F81AB3 /* TimeScroller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeScroller.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0C86AB3148C638200F81AB3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D0C86AB5148C638200F81AB3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D0C86AB7148C638200F81AB3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		D0C86ABB148C638200F81AB3 /* TimeScroller-Info.plist */ = {isa = PBXFileReference; path = "TimeScroller-Info.plist"; sourceTree = "<group>"; };
+		D0C86ABB148C638200F81AB3 /* TimeScroller-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TimeScroller-Info.plist"; sourceTree = "<group>"; };
 		D0C86ABD148C638200F81AB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D0C86ABF148C638200F81AB3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D0C86AC1148C638200F81AB3 /* TimeScroller-Prefix.pch */ = {isa = PBXFileReference; path = "TimeScroller-Prefix.pch"; sourceTree = "<group>"; };
+		D0C86AC1148C638200F81AB3 /* TimeScroller-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TimeScroller-Prefix.pch"; sourceTree = "<group>"; };
 		D0C86AC2148C638200F81AB3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D0C86AC3148C638200F81AB3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D0C86ACD148C63B900F81AB3 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -48,6 +60,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D07C3BF0148DD69600B8699E /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				D07C3BF2148DD6A300B8699E /* timescroll_hourhand.png */,
+				D07C3BF3148DD6A300B8699E /* timescroll_hourhand@2x.png */,
+				D07C3BF4148DD6A300B8699E /* timescroll_minutehand.png */,
+				D07C3BF5148DD6A300B8699E /* timescroll_minutehand@2x.png */,
+				D07C3BF6148DD6A300B8699E /* timescroll_pointer.png */,
+				D07C3BF7148DD6A300B8699E /* timescroll_pointer@2x.png */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
 		D0C86AA4148C638200F81AB3 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +135,7 @@
 		D0C86ACB148C639500F81AB3 /* TimeScroller */ = {
 			isa = PBXGroup;
 			children = (
+				D07C3BF0148DD69600B8699E /* Assets */,
 				D0C86AD2148C64F000F81AB3 /* TimeScroller.h */,
 				D0C86AD3148C64F000F81AB3 /* TimeScroller.m */,
 			);
@@ -176,6 +202,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0C86ABE148C638200F81AB3 /* InfoPlist.strings in Resources */,
+				D07C3BF8148DD6A300B8699E /* timescroll_hourhand.png in Resources */,
+				D07C3BF9148DD6A300B8699E /* timescroll_hourhand@2x.png in Resources */,
+				D07C3BFA148DD6A300B8699E /* timescroll_minutehand.png in Resources */,
+				D07C3BFB148DD6A300B8699E /* timescroll_minutehand@2x.png in Resources */,
+				D07C3BFC148DD6A300B8699E /* timescroll_pointer.png in Resources */,
+				D07C3BFD148DD6A300B8699E /* timescroll_pointer@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +292,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimerScroller/TimeScroller-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -274,6 +307,7 @@
 		D0C86AC9148C638200F81AB3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimerScroller/TimeScroller-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;

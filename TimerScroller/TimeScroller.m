@@ -35,10 +35,30 @@
         self.frame = CGRectMake(0.0f, 0.0f, 320.0f, CGRectGetHeight(self.frame));
         self.alpha = 0.0f;
         self.transform = CGAffineTransformMakeTranslation(10.0f, 0.0f);
-
+        
         _backgroundView = [[UIImageView alloc] initWithImage:background];
         _backgroundView.frame = CGRectMake(CGRectGetWidth(self.frame) - 80.0f, 0.0f, 80.0f, CGRectGetHeight(self.frame));
         [self addSubview:_backgroundView];
+        [_backgroundView release];
+        
+        _handContainer = [[UIView alloc] initWithFrame:CGRectMake(5.0f, 4.0f, 20.0f, 20.0f)];
+        [_backgroundView addSubview:_handContainer];
+        
+        _hourHand = [[UIView alloc] initWithFrame:CGRectMake(8.0f, 0.0f, 4.0f, 20.0f)];
+        UIImageView *hourImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timescroll_hourhand"]];
+        [_hourHand addSubview:hourImageView];
+        [hourImageView release];
+        [_handContainer addSubview:_hourHand];
+        [_hourHand release];
+        
+        _minuteHand = [[UIView alloc] initWithFrame:CGRectMake(8.0f, 0.0f, 4.0f, 20.0f)];
+        UIImageView *minuteImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timescroll_minutehand"]];
+        [_minuteHand addSubview:minuteImageView];
+        [minuteImageView release];
+        [_handContainer addSubview:_minuteHand];
+        [_minuteHand release];
+        
+        [_handContainer release];
         
         _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(30.0f, 4.0f, 50.0f, 20.0f)];
         _timeLabel.textColor = [UIColor whiteColor];
@@ -68,6 +88,18 @@
     return self;
 }
 
+- (void)dealloc {
+    
+    if (_lastDate) {
+        
+        [_lastDate release];
+        
+    }
+    
+    [super dealloc];
+    
+}
+
 - (void)captureTableViewAndScrollBar {
     
     _tableView = [self.delegate tableViewForTimeScroller:self];
@@ -94,15 +126,43 @@
 - (void)updateDisplayWithCell:(UITableViewCell *)cell {
     
     NSDate *date = [self.delegate dateForCell:cell];
+    
+    if ([date isEqualToDate:_lastDate])
+        return;
+    
     NSDate *today = [NSDate date];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekOfYearCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:date];
     NSDateComponents *todayComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekOfYearCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:today];
-
+    NSDateComponents *lastDateComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekOfYearCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:_lastDate];
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"h:mm a"];
     _timeLabel.text = [dateFormatter stringFromDate:date];
     [dateFormatter release];
+    
+    CGFloat currentHourAngle = 0.5f * ((lastDateComponents.hour * 60) + lastDateComponents.minute);
+    CGFloat newHourAngle = 0.5f * ((dateComponents.hour * 60) + dateComponents.minute);
+    CGFloat currentMinuteAngle = 6.0f * lastDateComponents.minute;
+    CGFloat newMinuteAngle = 6.0f * dateComponents.minute;   
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseOut animations:^{
+        
+        _hourHand.transform = CGAffineTransformMakeRotation(newHourAngle * (M_PI / 180));
+        _minuteHand.transform = CGAffineTransformMakeRotation(newMinuteAngle * (M_PI / 180));
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    
+    if (_lastDate) {
+        
+        [_lastDate release];
+        _lastDate = nil;
+    }
+    
+    _lastDate = [date retain];
     
     if (dateComponents.year == todayComponents.year && dateComponents.month == todayComponents.month && dateComponents.day == todayComponents.day) {
         
@@ -124,11 +184,11 @@
             
             _timeLabel.frame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);
             
-                
-                _dateLabel.text = @"Yesterday";
-                _dateLabel.alpha = 1.0f;
-                _backgroundView.frame = CGRectMake(CGRectGetWidth(self.frame) - 85.0f, 0.0f, 85.0f, CGRectGetHeight(self.frame));
-                
+            
+            _dateLabel.text = @"Yesterday";
+            _dateLabel.alpha = 1.0f;
+            _backgroundView.frame = CGRectMake(CGRectGetWidth(self.frame) - 85.0f, 0.0f, 85.0f, CGRectGetHeight(self.frame));
+            
             
         } completion:^(BOOL finished) {
             
@@ -173,7 +233,7 @@
             _dateLabel.text = [dateFormatter stringFromDate:date];
             [dateFormatter release];
             _dateLabel.alpha = 1.0f;
-             
+            
             CGFloat width = [_dateLabel.text sizeWithFont:_dateLabel.font].width + 50.0f;
             
             _backgroundView.frame = CGRectMake(CGRectGetWidth(self.frame) - width, 0.0f, width, CGRectGetHeight(self.frame));
@@ -222,7 +282,7 @@
                             (CGRectGetHeight(scrollBarFrame) / 2.0f) - (CGRectGetHeight(selfFrame) / 2.0f),
                             CGRectGetWidth(selfFrame),
                             CGRectGetHeight(selfFrame));
-        
+    
     CGPoint point = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     point = [_scrollBar convertPoint:point toView:_tableView];
     
@@ -253,7 +313,7 @@
 
 
 - (void)scrollViewWillBeginDragging {
-
+    
     CGRect selfFrame = self.frame;
     CGRect scrollBarFrame = _scrollBar.frame;
     
@@ -264,7 +324,7 @@
                             CGRectGetHeight(selfFrame));
     
     [_scrollBar addSubview:self];
-        
+    
     [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState  animations:^{
         self.alpha = 1.0f;
         self.transform = CGAffineTransformIdentity;

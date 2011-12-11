@@ -28,6 +28,11 @@
     UILabel *_timeLabel;
     UILabel *_dateLabel;
     UIImageView *_backgroundView;
+    UIView *_handContainer;
+    UIView *_hourHand;
+    UIView *_minuteHand;
+    NSDate *_lastDate;
+    
 }
 
 @property (nonatomic, assign) id <TimeScrollerDelegate> delegate;

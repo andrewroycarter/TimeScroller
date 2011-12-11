@@ -23,8 +23,6 @@
 
 @implementation TimeScroller
 
-#define kDistanceFromEdgeOfTableView -10.0f
-
 @synthesize delegate = _delegate;
 
 - (id)initWithDelegate:(id<TimeScrollerDelegate>)delegate {
@@ -36,7 +34,8 @@
         
         self.frame = CGRectMake(0.0f, 0.0f, 320.0f, CGRectGetHeight(self.frame));
         self.alpha = 0.0f;
-        
+        self.transform = CGAffineTransformMakeTranslation(10.0f, 0.0f);
+
         _backgroundView = [[UIImageView alloc] initWithImage:background];
         _backgroundView.frame = CGRectMake(CGRectGetWidth(self.frame) - 80.0f, 0.0f, 80.0f, CGRectGetHeight(self.frame));
         [self addSubview:_backgroundView];
@@ -74,7 +73,7 @@
     
     _tableView = [self.delegate tableViewForTimeScroller:self];
     
-    self.frame = CGRectMake(kDistanceFromEdgeOfTableView - CGRectGetWidth(self.frame) , 0.0f, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
+    self.frame = CGRectMake(CGRectGetWidth(self.frame) - 10.0f, 0.0f, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
     
     for (id subview in [_tableView subviews]) {
         if ([subview isKindOfClass:[UIImageView class]]) {
@@ -244,6 +243,7 @@
     
     [UIView animateWithDuration:0.3f delay:1.0f options:UIViewAnimationOptionBeginFromCurrentState  animations:^{
         self.alpha = 0.0f;
+        self.transform = CGAffineTransformMakeTranslation(10.0f, 0.0f);
     } completion:^(BOOL finished) {
         
     }];
@@ -266,6 +266,7 @@
         
     [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState  animations:^{
         self.alpha = 1.0f;
+        self.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
         
     }];

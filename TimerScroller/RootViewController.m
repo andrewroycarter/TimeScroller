@@ -24,14 +24,16 @@
         
         NSCalendar *calendar = [NSCalendar currentCalendar];
         NSDateComponents *components = [[NSDateComponents alloc] init];
+        NSDate *today = [NSDate date];
+        NSDateComponents *todayComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:today];
         
-        for (int i = 11; i >= -15; i--) {
+        for (int i = todayComponents.day; i >= -15; i--) {
             
             NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
             [dictionary setObject:@"Title here" forKey:@"title"];
             
-            components.year = 2011;
-            components.month = 12;
+            components.year = todayComponents.year;
+            components.month = todayComponents.month;
             components.day = i;
             
             NSDate *date = [calendar dateFromComponents:components];

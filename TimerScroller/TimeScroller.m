@@ -44,7 +44,6 @@
         _timeLabel.textColor = [UIColor whiteColor];
         _timeLabel.shadowColor = [UIColor blackColor];
         _timeLabel.shadowOffset = CGSizeMake(-0.5f, -0.5f);
-        _timeLabel.text = @"6:00 PM";
         _timeLabel.backgroundColor = [UIColor clearColor];
         _timeLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:9.0f];
         _timeLabel.autoresizingMask = UIViewAutoresizingNone;
@@ -99,10 +98,12 @@
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekOfYearCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:date];
     NSDateComponents *todayComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekOfYearCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:today];
-    
-    NSLog(@"Date: %d %d %d", dateComponents.year, dateComponents.month, dateComponents.day);
-    NSLog(@"Today: %d %d %d", todayComponents.year, todayComponents.month, todayComponents.day);
 
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"h:mm a"];
+    _timeLabel.text = [dateFormatter stringFromDate:date];
+    [dateFormatter release];
+    
     if (dateComponents.year == todayComponents.year && dateComponents.month == todayComponents.month && dateComponents.day == todayComponents.day) {
         
         _dateLabel.text = @"";

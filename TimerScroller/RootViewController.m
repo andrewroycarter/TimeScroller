@@ -35,6 +35,8 @@
             components.year = todayComponents.year;
             components.month = todayComponents.month;
             components.day = i;
+            components.hour = arc4random() % 23;
+            components.minute = arc4random() % 59;
             
             NSDate *date = [calendar dateFromComponents:components];
             [dictionary setObject:date forKey:@"date"];

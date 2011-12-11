@@ -27,6 +27,7 @@
     UIImageView *_scrollBar;
     UILabel *_timeLabel;
     UILabel *_dateLabel;
+    UIImageView *_backgroundView;
 }
 
 @property (nonatomic, assign) id <TimeScrollerDelegate> delegate;

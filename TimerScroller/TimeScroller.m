@@ -31,12 +31,15 @@
     
     UIImage *background = [[UIImage imageNamed:@"timescroll_pointer"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0f, 35.0f, 0.0f, 10.0f)];
     
-    self = [super initWithImage:background];
+    self = [super initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, background.size.height)];
     if (self) {
-                
-        self.frame = CGRectMake(0.0f, 0.0f, 80.0f, CGRectGetHeight(self.frame));
+        
+        self.frame = CGRectMake(0.0f, 0.0f, 320.0f, CGRectGetHeight(self.frame));
         self.alpha = 0.0f;
-        self.transform = CGAffineTransformMakeTranslation(abs(kDistanceFromEdgeOfTableView), 0.0f);
+        
+        _backgroundView = [[UIImageView alloc] initWithImage:background];
+        _backgroundView.frame = CGRectMake(CGRectGetWidth(self.frame) - 80.0f, 0.0f, 80.0f, CGRectGetHeight(self.frame));
+        [self addSubview:_backgroundView];
         
         _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(30.0f, 4.0f, 50.0f, 20.0f)];
         _timeLabel.textColor = [UIColor whiteColor];
@@ -46,7 +49,7 @@
         _timeLabel.backgroundColor = [UIColor clearColor];
         _timeLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:9.0f];
         _timeLabel.autoresizingMask = UIViewAutoresizingNone;
-        [self addSubview:_timeLabel];
+        [_backgroundView addSubview:_timeLabel];
         [_timeLabel release];
         
         _dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(30.0f, 9.0f, 100.0f, 20.0f)];
@@ -57,7 +60,7 @@
         _dateLabel.backgroundColor = [UIColor clearColor];
         _dateLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:9.0f];
         _dateLabel.alpha = 0.0f;
-        [self addSubview:_dateLabel];
+        [_backgroundView addSubview:_dateLabel];
         [_dateLabel release];
         
         _delegate = delegate;
@@ -98,13 +101,16 @@
     NSDateComponents *dateComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekOfYearCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:date];
     NSDateComponents *todayComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekOfYearCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:today];
     
+    NSLog(@"Date: %d %d %d", dateComponents.year, dateComponents.month, dateComponents.day);
+    NSLog(@"Today: %d %d %d", todayComponents.year, todayComponents.month, todayComponents.day);
+
     if (dateComponents.year == todayComponents.year && dateComponents.month == todayComponents.month && dateComponents.day == todayComponents.day) {
-
+        
         _dateLabel.text = @"";
-
+        
         [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseOut animations:^{
-
-            self.frame = CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame), 80.0f, CGRectGetHeight(self.frame));
+            
+            _backgroundView.frame = CGRectMake(CGRectGetWidth(self.frame) - 80.0f, 0.0f, 80.0f, CGRectGetHeight(self.frame));
             _timeLabel.frame = CGRectMake(30.0f, 4.0f, 100.0f, 20.0f);
             _dateLabel.alpha = 0.0f;
             
@@ -112,26 +118,92 @@
             
         }];
         
-    } else {
-    
+    } else if ((dateComponents.year == todayComponents.year) && (dateComponents.month == todayComponents.month) && (dateComponents.day == todayComponents.day - 1)) {
+        
         [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseOut animations:^{
             
             _timeLabel.frame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);
             
-            if (dateComponents.year == todayComponents.year && dateComponents.weekOfYear == todayComponents.weekOfYear && dateComponents.day + 1 == todayComponents.day) {
                 
                 _dateLabel.text = @"Yesterday";
                 _dateLabel.alpha = 1.0f;
-                self.frame = CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame), 85.0f, CGRectGetHeight(self.frame));
+                _backgroundView.frame = CGRectMake(CGRectGetWidth(self.frame) - 85.0f, 0.0f, 85.0f, CGRectGetHeight(self.frame));
                 
-            }
             
         } completion:^(BOOL finished) {
             
         }];
-    
-    }
-    
+        
+    } else if ((dateComponents.year == todayComponents.year) && (dateComponents.weekOfYear == todayComponents.weekOfYear)) {
+        
+        [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseOut animations:^{
+            
+            _timeLabel.frame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);
+            
+            
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            dateFormatter.dateFormat = @"cccc";
+            _dateLabel.text = [dateFormatter stringFromDate:date];
+            [dateFormatter release];
+            _dateLabel.alpha = 1.0f;
+            
+            CGFloat width = 0.0f;
+            if ([_dateLabel.text sizeWithFont:_dateLabel.font].width < 50) {
+                width = 85.0f;
+            } else {
+                width = 95.0f;
+            }
+            
+            _backgroundView.frame = CGRectMake(CGRectGetWidth(self.frame) - width, 0.0f, width, CGRectGetHeight(self.frame));
+            
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+    } else if (dateComponents.year == todayComponents.year) {
+        
+        [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseOut animations:^{
+            
+            _timeLabel.frame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);
+            
+            
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            dateFormatter.dateFormat = @"MMMM d";
+            _dateLabel.text = [dateFormatter stringFromDate:date];
+            [dateFormatter release];
+            _dateLabel.alpha = 1.0f;
+             
+            CGFloat width = [_dateLabel.text sizeWithFont:_dateLabel.font].width + 50.0f;
+            
+            _backgroundView.frame = CGRectMake(CGRectGetWidth(self.frame) - width, 0.0f, width, CGRectGetHeight(self.frame));
+            
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+    } else {
+        
+        [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseOut animations:^{
+            
+            _timeLabel.frame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            dateFormatter.dateFormat = @"MMMM d, yyyy";
+            _dateLabel.text = [dateFormatter stringFromDate:date];
+            [dateFormatter release];
+            _dateLabel.alpha = 1.0f;
+            
+            CGFloat width = [_dateLabel.text sizeWithFont:_dateLabel.font].width + 50.0f;
+            
+            _backgroundView.frame = CGRectMake(CGRectGetWidth(self.frame) - width, 0.0f, width, CGRectGetHeight(self.frame));
+            
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+    } 
     
 }
 
@@ -146,11 +218,11 @@
     CGRect selfFrame = self.frame;
     CGRect scrollBarFrame = _scrollBar.frame;
     
-    self.frame = CGRectMake(kDistanceFromEdgeOfTableView - CGRectGetWidth(selfFrame),
+    self.frame = CGRectMake(-(CGRectGetWidth(selfFrame)),
                             (CGRectGetHeight(scrollBarFrame) / 2.0f) - (CGRectGetHeight(selfFrame) / 2.0f),
                             CGRectGetWidth(selfFrame),
                             CGRectGetHeight(selfFrame));
-    
+        
     CGPoint point = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     point = [_scrollBar convertPoint:point toView:_tableView];
     
@@ -170,9 +242,8 @@
     self.frame = newFrame;
     [_tableView.superview addSubview:self];
     
-    [UIView animateWithDuration:0.3f delay:1.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowAnimatedContent animations:^{
+    [UIView animateWithDuration:0.3f delay:1.0f options:UIViewAnimationOptionBeginFromCurrentState  animations:^{
         self.alpha = 0.0f;
-        self.transform = CGAffineTransformMakeTranslation(abs(kDistanceFromEdgeOfTableView), 0.0f);
     } completion:^(BOOL finished) {
         
     }];
@@ -181,15 +252,24 @@
 
 
 - (void)scrollViewWillBeginDragging {
+
+    CGRect selfFrame = self.frame;
+    CGRect scrollBarFrame = _scrollBar.frame;
     
-    [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowAnimatedContent animations:^{
+    
+    self.frame = CGRectMake(-(CGRectGetWidth(selfFrame)),
+                            (CGRectGetHeight(scrollBarFrame) / 2.0f) - (CGRectGetHeight(selfFrame) / 2.0f),
+                            CGRectGetWidth(selfFrame),
+                            CGRectGetHeight(selfFrame));
+    
+    [_scrollBar addSubview:self];
+        
+    [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState  animations:^{
         self.alpha = 1.0f;
-        self.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
         
     }];
     
-    [_scrollBar addSubview:self];
     
 }
 

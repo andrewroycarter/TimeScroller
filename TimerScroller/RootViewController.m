@@ -25,7 +25,7 @@
         NSCalendar *calendar = [NSCalendar currentCalendar];
         NSDateComponents *components = [[NSDateComponents alloc] init];
         
-        for (int i = 6; i >= -15; i--) {
+        for (int i = 11; i >= -15; i--) {
             
             NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
             [dictionary setObject:@"Title here" forKey:@"title"];

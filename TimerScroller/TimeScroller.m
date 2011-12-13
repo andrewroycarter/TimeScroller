@@ -164,106 +164,90 @@
     
     _lastDate = [date retain];
     
+    
+    CGRect backgroundFrame = _backgroundView.frame;
+    CGRect timeLabelFrame = _timeLabel.frame;
+    CGRect dateLabelFrame = _dateLabel.frame;
+    NSString *dateLabelString = _dateLabel.text;
+    NSString *timeLabelString = _timeLabel.text;
+    CGFloat dateLabelAlpha = _dateLabel.alpha;
+    
     if (dateComponents.year == todayComponents.year && dateComponents.month == todayComponents.month && dateComponents.day == todayComponents.day) {
         
-        _dateLabel.text = @"";
-        
-        [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseOut animations:^{
-            
-            _backgroundView.frame = CGRectMake(CGRectGetWidth(self.frame) - 80.0f, 0.0f, 80.0f, CGRectGetHeight(self.frame));
-            _timeLabel.frame = CGRectMake(30.0f, 4.0f, 100.0f, 20.0f);
-            _dateLabel.alpha = 0.0f;
-            
-        } completion:^(BOOL finished) {
-            
-        }];
+        dateLabelString = @"";
+  
+        backgroundFrame = CGRectMake(CGRectGetWidth(self.frame) - 80.0f, 0.0f, 80.0f, CGRectGetHeight(self.frame));
+        timeLabelFrame = CGRectMake(30.0f, 4.0f, 100.0f, 20.0f);
+        dateLabelAlpha = 0.0f;
         
     } else if ((dateComponents.year == todayComponents.year) && (dateComponents.month == todayComponents.month) && (dateComponents.day == todayComponents.day - 1)) {
+
+        timeLabelFrame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);
         
-        [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseOut animations:^{
-            
-            _timeLabel.frame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);
-            
-            
-            _dateLabel.text = @"Yesterday";
-            _dateLabel.alpha = 1.0f;
-            _backgroundView.frame = CGRectMake(CGRectGetWidth(self.frame) - 85.0f, 0.0f, 85.0f, CGRectGetHeight(self.frame));
-            
-            
-        } completion:^(BOOL finished) {
-            
-        }];
+        dateLabelString = @"Yesterday";
+        dateLabelAlpha = 1.0f;
+        backgroundFrame = CGRectMake(CGRectGetWidth(self.frame) - 85.0f, 0.0f, 85.0f, CGRectGetHeight(self.frame));
         
     } else if ((dateComponents.year == todayComponents.year) && (dateComponents.weekOfYear == todayComponents.weekOfYear)) {
+
+        timeLabelFrame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);        
         
-        [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseOut animations:^{
-            
-            _timeLabel.frame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);
-            
-            
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            dateFormatter.dateFormat = @"cccc";
-            _dateLabel.text = [dateFormatter stringFromDate:date];
-            [dateFormatter release];
-            _dateLabel.alpha = 1.0f;
-            
-            CGFloat width = 0.0f;
-            if ([_dateLabel.text sizeWithFont:_dateLabel.font].width < 50) {
-                width = 85.0f;
-            } else {
-                width = 95.0f;
-            }
-            
-            _backgroundView.frame = CGRectMake(CGRectGetWidth(self.frame) - width, 0.0f, width, CGRectGetHeight(self.frame));
-            
-            
-        } completion:^(BOOL finished) {
-            
-        }];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"cccc";
+        dateLabelString = [dateFormatter stringFromDate:date];
+        [dateFormatter release];
+        dateLabelAlpha = 1.0f;
+        
+        CGFloat width = 0.0f;
+        if ([dateLabelString sizeWithFont:_dateLabel.font].width < 50) {
+            width = 85.0f;
+        } else {
+            width = 95.0f;
+        }
+        
+        backgroundFrame = CGRectMake(CGRectGetWidth(self.frame) - width, 0.0f, width, CGRectGetHeight(self.frame));
         
     } else if (dateComponents.year == todayComponents.year) {
+
+        timeLabelFrame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);
         
-        [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseOut animations:^{
-            
-            _timeLabel.frame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);
-            
-            
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            dateFormatter.dateFormat = @"MMMM d";
-            _dateLabel.text = [dateFormatter stringFromDate:date];
-            [dateFormatter release];
-            _dateLabel.alpha = 1.0f;
-            
-            CGFloat width = [_dateLabel.text sizeWithFont:_dateLabel.font].width + 50.0f;
-            
-            _backgroundView.frame = CGRectMake(CGRectGetWidth(self.frame) - width, 0.0f, width, CGRectGetHeight(self.frame));
-            
-            
-        } completion:^(BOOL finished) {
-            
-        }];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"MMMM d";
+        dateLabelString = [dateFormatter stringFromDate:date];
+        [dateFormatter release];
+        dateLabelAlpha = 1.0f;
+        
+        CGFloat width = [dateLabelString sizeWithFont:_dateLabel.font].width + 50.0f;
+        
+        backgroundFrame = CGRectMake(CGRectGetWidth(self.frame) - width, 0.0f, width, CGRectGetHeight(self.frame));
         
     } else {
+
+        timeLabelFrame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"MMMM d, yyyy";
+        dateLabelString = [dateFormatter stringFromDate:date];
+        [dateFormatter release];
+        dateLabelAlpha = 1.0f;
         
-        [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseOut animations:^{
-            
-            _timeLabel.frame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            dateFormatter.dateFormat = @"MMMM d, yyyy";
-            _dateLabel.text = [dateFormatter stringFromDate:date];
-            [dateFormatter release];
-            _dateLabel.alpha = 1.0f;
-            
-            CGFloat width = [_dateLabel.text sizeWithFont:_dateLabel.font].width + 50.0f;
-            
-            _backgroundView.frame = CGRectMake(CGRectGetWidth(self.frame) - width, 0.0f, width, CGRectGetHeight(self.frame));
-            
-            
-        } completion:^(BOOL finished) {
-            
-        }];
+        CGFloat width = [dateLabelString sizeWithFont:_dateLabel.font].width + 50.0f;
         
+        backgroundFrame = CGRectMake(CGRectGetWidth(self.frame) - width, 0.0f, width, CGRectGetHeight(self.frame));
+
     } 
+    
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowAnimatedContent animations:^{
+        
+        _timeLabel.frame = timeLabelFrame;
+        _dateLabel.frame = dateLabelFrame;
+        _dateLabel.alpha = dateLabelAlpha;
+        _timeLabel.text = timeLabelString;
+        _dateLabel.text = dateLabelString;
+        _backgroundView.frame = backgroundFrame;
+        
+    } completion:^(BOOL finished) {
+        
+    }];
     
 }
 

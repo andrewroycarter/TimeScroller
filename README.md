@@ -1,4 +1,4 @@
-![Screenshot: Launch image](https://github.com/Nitewriter/Breaker-iOS/raw/master/screenshot.png)
+![Screenshot: Launch image](https://github.com/andrewroycarter/TimeScroller/raw/master/screenshot.png)
 
 TimeScroller is an effort to reproduce the nifty view that hovers beside the scroll bar in the Path app. 
 

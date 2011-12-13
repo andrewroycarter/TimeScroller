@@ -273,27 +273,6 @@
             
         }];
     
-    /*
-    [UIView animateWithDuration:0.15f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseOut animations:^{
-        
-        _hourHand.transform = CGAffineTransformMakeRotation((newHourAngle / 2.0f) * (M_PI / 180.0f));
-        _minuteHand.transform = CGAffineTransformMakeRotation((newMinuteAngle / 2.0f) * (M_PI / 180.0f));
-        
-        
-    } completion:^(BOOL finished) {
-        
-        [UIView animateWithDuration:0.15f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseOut animations:^{
-            
-            _hourHand.transform = CGAffineTransformMakeRotation(newHourAngle * (M_PI / 180.0f));
-            _minuteHand.transform = CGAffineTransformMakeRotation(newMinuteAngle * (M_PI / 180.0f));
-            
-        } completion:^(BOOL finished) {
-            
-        }];
-        
-    }];
-    */
-    
     if (_lastDate) {
         
         [_lastDate release];

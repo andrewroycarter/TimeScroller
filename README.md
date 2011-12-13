@@ -2,4 +2,4 @@
 
 TimeScroller is an effort to reproduce the nifty view that hovers beside the scroll bar in the Path app. 
 
-Right now it's a work in progress and only has basic functionality, but I'm hoping to have it done, styled, and easily customizable soon.  
+I've got it pretty close to what Path does now, and will be applying the final tweaks over the next few days! Enjoy

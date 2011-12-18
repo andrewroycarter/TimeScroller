@@ -18,9 +18,9 @@ In a UIViewController that contains a UITableView simply create a new TimeScroll
 And conform to the TimeScrollerDelegate protocol
 
   //The UITableView that you'd like the TimeScroller to be in
-  - (UITableView *)tableViewForTimeScroller:(TimeScroller *)timeScroller {
-      return _myTableView;
-    }
+    - (UITableView *)tableViewForTimeScroller:(TimeScroller *)timeScroller {
+        return _myTableView;
+      }
 
   //The date for a given cell
   - (NSDate *)dateForCell:(UITableViewCell *)cell {

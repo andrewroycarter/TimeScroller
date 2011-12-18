@@ -12,11 +12,11 @@ Usage
 -----
 
 In a UIViewController that contains a UITableView simply create a new TimeScroller object
-
+```
   _timeScroller = [[Timescroller alloc] initWithDelegate:self];
-
+```
 And conform to the TimeScrollerDelegate protocol
-
+```
   //The UITableView that you'd like the TimeScroller to be in
     - (UITableView *)tableViewForTimeScroller:(TimeScroller *)timeScroller {
         return _myTableView;
@@ -29,9 +29,9 @@ And conform to the TimeScrollerDelegate protocol
       NSDate *date = [dictionary objectForKey:@"date"];
       return date;                        
   }
-
+```
 And let the TimeScroller know what's happening with the UITableView by using UIScrollViewDelegate
-
+```
   - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [_timeScroller scrollViewDidScroll];       
   }
@@ -49,7 +49,7 @@ And let the TimeScroller know what's happening with the UITableView by using UIS
       [_timeScroller scrollViewDidEndDecelerating];                                      
     }                                               
   }
-
+```
 Other Credit
 ------------
 

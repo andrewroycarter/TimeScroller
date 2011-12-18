@@ -46,7 +46,7 @@ And let the TimeScroller know what's happening with the UITableView by using UIS
       if (!decelerate) {                        
         [_timeScroller scrollViewDidEndDecelerating];                                      
       }                                               
-   }
+    }
 
 Other Credit
 ------------

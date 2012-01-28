@@ -203,6 +203,10 @@
         hourPartThree = hourPartTwo - part;
         hourPartFour = hourPartThree - part;
                 
+    } else {
+        
+        hourPartOne = hourPartTwo = hourPartThree = hourPartFour = currentHourAngle;
+        
     }
     
     if (newMinuteAngle > currentMinuteAngle && [date timeIntervalSinceDate:_lastDate] > 0) {
@@ -240,6 +244,10 @@
         minutePartTwo = minutePartOne - part;
         minutePartThree = minutePartTwo - part;
         minutePartFour = minutePartThree - part;
+        
+    } else {
+        
+        minutePartOne = minutePartTwo = minutePartThree = minutePartFour = currentMinuteAngle;
         
     }
     

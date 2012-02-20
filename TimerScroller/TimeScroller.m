@@ -20,6 +20,10 @@
     
     
 }
+@property (nonatomic, copy) NSDateFormatter *timeDateFormatter;
+@property (nonatomic, copy) NSDateFormatter *dayOfWeekDateFormatter;
+@property (nonatomic, copy) NSDateFormatter *monthDayDateFormatter;
+@property (nonatomic, copy) NSDateFormatter *monthDayYearDateFormatter;
 
 - (void)updateDisplayWithCell:(UITableViewCell *)cell;
 - (void)captureTableViewAndScrollBar;
@@ -30,6 +34,12 @@
 @implementation TimeScroller
 
 @synthesize delegate = _delegate;
+@synthesize calendar = _calendar;
+@synthesize timeDateFormatter = _dateFormattter;
+@synthesize dayOfWeekDateFormatter = _dayOfWeekDateFormatter;
+@synthesize monthDayDateFormatter = _monthDayDateFormatter;
+@synthesize monthDayYearDateFormatter = _monthDayYearDateFormatter;
+
 
 - (id)initWithDelegate:(id<TimeScrollerDelegate>)delegate {
     
@@ -37,6 +47,8 @@
     
     self = [super initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, background.size.height)];
     if (self) {
+        
+        self.calendar = [NSCalendar currentCalendar];
         
         self.frame = CGRectMake(0.0f, 0.0f, 320.0f, CGRectGetHeight(self.frame));
         self.alpha = 0.0f;
@@ -94,13 +106,65 @@
     return self;
 }
 
-- (void)dealloc {
+- (void)createFormatters{
     
-    if (_lastDate) {
-        
-        [_lastDate release];
-        
-    }
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setCalendar:self.calendar];
+    [dateFormatter setTimeZone:self.calendar.timeZone];
+    [dateFormatter setDateFormat:@"h:mm a"];
+    self.timeDateFormatter = dateFormatter;
+    [dateFormatter release];    
+    
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setCalendar:self.calendar];
+    [dateFormatter setTimeZone:self.calendar.timeZone];
+    dateFormatter.dateFormat = @"cccc";
+    self.dayOfWeekDateFormatter = dateFormatter;
+    [dateFormatter release];    
+    
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setCalendar:self.calendar];
+    [dateFormatter setTimeZone:self.calendar.timeZone];
+    dateFormatter.dateFormat = @"MMMM d";
+    self.monthDayDateFormatter = dateFormatter;
+    [dateFormatter release];    
+    
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setCalendar:self.calendar];
+    [dateFormatter setTimeZone:self.calendar.timeZone];
+    dateFormatter.dateFormat = @"MMMM d, yyyy";
+    self.monthDayYearDateFormatter = dateFormatter;
+    [dateFormatter release];    
+    
+}
+
+
+- (void)setCalendar:(NSCalendar *)cal{
+
+    [cal retain];
+    [_calendar autorelease];
+    _calendar = cal;
+    
+    [self createFormatters];
+
+}
+
+- (void)dealloc {
+
+    [_calendar release];
+    _calendar = nil;
+
+    [_dayOfWeekDateFormatter release];
+    _dayOfWeekDateFormatter = nil;
+    [_monthDayDateFormatter release];
+    _monthDayDateFormatter = nil;
+    [_monthDayYearDateFormatter release];
+    _monthDayYearDateFormatter = nil;
+    
+    [_dateFormattter release];
+    _dateFormattter = nil;
+    
+    [_lastDate release];
     
     [super dealloc];
     
@@ -137,16 +201,13 @@
         return;
     
     NSDate *today = [NSDate date];
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *dateComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekOfYearCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:date];
-    NSDateComponents *todayComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekOfYearCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:today];
-    NSDateComponents *lastDateComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekOfYearCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:_lastDate];
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"h:mm a"];
-    _timeLabel.text = [dateFormatter stringFromDate:date];
-    [dateFormatter release];
-    
+    NSDateComponents *dateComponents = [self.calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekOfYearCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:date];
+    NSDateComponents *todayComponents = [self.calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekOfYearCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:today];
+    NSDateComponents *lastDateComponents = [self.calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekOfYearCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:_lastDate];
+        
+    _timeLabel.text = [self.timeDateFormatter stringFromDate:date];
+
     CGFloat currentHourAngle = 0.5f * ((lastDateComponents.hour * 60.0f) + lastDateComponents.minute);
     CGFloat newHourAngle = 0.5f * ((dateComponents.hour * 60.0f) + dateComponents.minute);
     CGFloat currentMinuteAngle = 6.0f * lastDateComponents.minute;
@@ -313,12 +374,8 @@
         
     } else if ((dateComponents.year == todayComponents.year) && (dateComponents.weekOfYear == todayComponents.weekOfYear)) {
 
-        timeLabelFrame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);        
-        
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateFormat = @"cccc";
-        dateLabelString = [dateFormatter stringFromDate:date];
-        [dateFormatter release];
+        timeLabelFrame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);                
+        dateLabelString = [self.dayOfWeekDateFormatter stringFromDate:date];
         dateLabelAlpha = 1.0f;
         
         CGFloat width = 0.0f;
@@ -334,10 +391,7 @@
 
         timeLabelFrame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);
         
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateFormat = @"MMMM d";
-        dateLabelString = [dateFormatter stringFromDate:date];
-        [dateFormatter release];
+        dateLabelString = [self.monthDayDateFormatter stringFromDate:date];
         dateLabelAlpha = 1.0f;
         
         CGFloat width = [dateLabelString sizeWithFont:_dateLabel.font].width + 50.0f;
@@ -347,10 +401,7 @@
     } else {
 
         timeLabelFrame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateFormat = @"MMMM d, yyyy";
-        dateLabelString = [dateFormatter stringFromDate:date];
-        [dateFormatter release];
+        dateLabelString = [self.monthDayYearDateFormatter stringFromDate:date];
         dateLabelAlpha = 1.0f;
         
         CGFloat width = [dateLabelString sizeWithFont:_dateLabel.font].width + 50.0f;

@@ -26,7 +26,7 @@
 @end
 
 @interface TimeScroller : UIImageView {
-
+    
     @protected
     id <TimeScrollerDelegate> _delegate;
     UITableView *_tableView;
@@ -42,6 +42,7 @@
 }
 
 @property (nonatomic, assign) id <TimeScrollerDelegate> delegate;
+@property (nonatomic, copy) NSCalendar *calendar;
 
 - (id)initWithDelegate:(id <TimeScrollerDelegate>)delegate;
 - (void)scrollViewDidScroll;

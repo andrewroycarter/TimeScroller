@@ -349,12 +349,12 @@
     _lastDate = [date retain];
     
     
-    CGRect backgroundFrame = _backgroundView.frame;
-    CGRect timeLabelFrame = _timeLabel.frame;
+    CGRect backgroundFrame;
+    CGRect timeLabelFrame;
     CGRect dateLabelFrame = _dateLabel.frame;
-    NSString *dateLabelString = _dateLabel.text;
+    NSString *dateLabelString;
     NSString *timeLabelString = _timeLabel.text;
-    CGFloat dateLabelAlpha = _dateLabel.alpha;
+    CGFloat dateLabelAlpha;
     
     if (dateComponents.year == todayComponents.year && dateComponents.month == todayComponents.month && dateComponents.day == todayComponents.day) {
         

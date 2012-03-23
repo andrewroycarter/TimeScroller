@@ -51,8 +51,9 @@ And let the TimeScroller know what's happening with the UITableView by using UIS
 Other Credit
 ------------
 
-Thanks to Path for making great new UI and moving the bar higher
+Thanks to Path for making great new UI and moving the bar higher.
 Thanks to @bsirach for helping with design!
+Also thanks to everyone who has contributed bug fixes and features to the project!
 
 
 License

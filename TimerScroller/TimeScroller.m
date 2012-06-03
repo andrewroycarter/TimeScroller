@@ -18,6 +18,7 @@
 
 @interface TimeScroller() {
     
+    
 }
 @property (nonatomic, copy) NSDateFormatter *timeDateFormatter;
 @property (nonatomic, copy) NSDateFormatter *dayOfWeekDateFormatter;
@@ -69,6 +70,7 @@
         UIImageView *minuteImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timescroll_minutehand"]];
         [_minuteHand addSubview:minuteImageView];
         [_handContainer addSubview:_minuteHand];
+        
         
         _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(30.0f, 4.0f, 50.0f, 20.0f)];
         _timeLabel.textColor = [UIColor whiteColor];
@@ -126,10 +128,13 @@
 
 
 - (void)setCalendar:(NSCalendar *)cal{
+
     _calendar = cal;
     
     [self createFormatters];
+
 }
+
 
 - (void)captureTableViewAndScrollBar {
     
@@ -172,7 +177,7 @@
     CGFloat currentHourAngle = 0.5f * ((lastDateComponents.hour * 60.0f) + lastDateComponents.minute);
     CGFloat newHourAngle = 0.5f * ((dateComponents.hour * 60.0f) + dateComponents.minute);
     CGFloat currentMinuteAngle = 6.0f * lastDateComponents.minute;
-    CGFloat newMinuteAngle = 6.0f * dateComponents.minute;
+    CGFloat newMinuteAngle = 6.0f * dateComponents.minute;   
     
     currentHourAngle = currentHourAngle > 360 ? currentHourAngle - 360 : currentHourAngle;
     newHourAngle = newHourAngle > 360 ? newHourAngle - 360 : newHourAngle;
@@ -224,7 +229,7 @@
         hourPartTwo = hourPartOne - part;
         hourPartThree = hourPartTwo - part;
         hourPartFour = hourPartThree - part;
-        
+                
     } else {
         
         hourPartOne = hourPartTwo = hourPartThree = hourPartFour = currentHourAngle;
@@ -310,8 +315,12 @@
         }];
     
     if (_lastDate) {
+        
         _lastDate = nil;
     }
+    
+    _lastDate = date;
+    
     
     CGRect backgroundFrame;
     CGRect timeLabelFrame;
@@ -338,7 +347,7 @@
         
     } else if ((dateComponents.year == todayComponents.year) && (dateComponents.weekOfYear == todayComponents.weekOfYear)) {
 
-        timeLabelFrame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);
+        timeLabelFrame = CGRectMake(30.0f, 4.0f, 100.0f, 10.0f);                
         dateLabelString = [self.dayOfWeekDateFormatter stringFromDate:date];
         dateLabelAlpha = 1.0f;
         
@@ -408,7 +417,7 @@
     CGPoint point = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     point = [_scrollBar convertPoint:point toView:_tableView];
     
-    UIView *view = [_tableView hitTest:point withEvent:[[UIEvent alloc] init]];
+    UIView *view = [_tableView hitTest:point withEvent:nil];
     
     if ([view.superview isKindOfClass:[UITableViewCell class]]) {
         
@@ -451,7 +460,7 @@
         self.alpha = 1.0f;
         self.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
-    
+        
     }];
     
     

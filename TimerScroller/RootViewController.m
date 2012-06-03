@@ -43,7 +43,6 @@
             
         }
         
-        [components release];
         
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 416.0f) style:UITableViewStylePlain];
         _tableView.delegate = self;
@@ -54,15 +53,6 @@
     return self;
 }
 
-- (void)dealloc {
-    
-    [_tableView release];
-    [_timeScroller release];
-    [_datasource release];
-    
-    [super dealloc];
-
-}
 
 - (void)loadView {
     
@@ -71,7 +61,6 @@
     [view addSubview:_tableView];
     
     self.view = view;
-    [view release];
     
 }
 
@@ -150,7 +139,7 @@
     
     if (!cell) {
     
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
     
     }
     
@@ -162,7 +151,6 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterShortStyle];
     cell.detailTextLabel.text = [dateFormatter stringFromDate:date];
-    [dateFormatter release];
     
     return cell;
 }

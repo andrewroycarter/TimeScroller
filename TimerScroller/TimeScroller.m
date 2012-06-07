@@ -57,7 +57,6 @@
         _backgroundView = [[UIImageView alloc] initWithImage:background];
         _backgroundView.frame = CGRectMake(CGRectGetWidth(self.frame) - 80.0f, 0.0f, 80.0f, CGRectGetHeight(self.frame));
         [self addSubview:_backgroundView];
-        [_backgroundView release];
         
         _handContainer = [[UIView alloc] initWithFrame:CGRectMake(5.0f, 4.0f, 20.0f, 20.0f)];
         [_backgroundView addSubview:_handContainer];
@@ -65,18 +64,13 @@
         _hourHand = [[UIView alloc] initWithFrame:CGRectMake(8.0f, 0.0f, 4.0f, 20.0f)];
         UIImageView *hourImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timescroll_hourhand"]];
         [_hourHand addSubview:hourImageView];
-        [hourImageView release];
         [_handContainer addSubview:_hourHand];
-        [_hourHand release];
         
         _minuteHand = [[UIView alloc] initWithFrame:CGRectMake(8.0f, 0.0f, 4.0f, 20.0f)];
         UIImageView *minuteImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timescroll_minutehand"]];
         [_minuteHand addSubview:minuteImageView];
-        [minuteImageView release];
         [_handContainer addSubview:_minuteHand];
-        [_minuteHand release];
         
-        [_handContainer release];
         
         _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(30.0f, 4.0f, 50.0f, 20.0f)];
         _timeLabel.textColor = [UIColor whiteColor];
@@ -86,7 +80,6 @@
         _timeLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:9.0f];
         _timeLabel.autoresizingMask = UIViewAutoresizingNone;
         [_backgroundView addSubview:_timeLabel];
-        [_timeLabel release];
         
         _dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(30.0f, 9.0f, 100.0f, 20.0f)];
         _dateLabel.textColor = [UIColor colorWithRed:179.0f green:179.0f blue:179.0f alpha:0.60f];
@@ -97,7 +90,6 @@
         _dateLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:9.0f];
         _dateLabel.alpha = 0.0f;
         [_backgroundView addSubview:_dateLabel];
-        [_dateLabel release];
         
         _delegate = delegate;
         
@@ -113,62 +105,36 @@
     [dateFormatter setTimeZone:self.calendar.timeZone];
     [dateFormatter setDateFormat:@"h:mm a"];
     self.timeDateFormatter = dateFormatter;
-    [dateFormatter release];    
     
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setCalendar:self.calendar];
     [dateFormatter setTimeZone:self.calendar.timeZone];
     dateFormatter.dateFormat = @"cccc";
     self.dayOfWeekDateFormatter = dateFormatter;
-    [dateFormatter release];    
     
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setCalendar:self.calendar];
     [dateFormatter setTimeZone:self.calendar.timeZone];
     dateFormatter.dateFormat = @"MMMM d";
     self.monthDayDateFormatter = dateFormatter;
-    [dateFormatter release];    
     
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setCalendar:self.calendar];
     [dateFormatter setTimeZone:self.calendar.timeZone];
     dateFormatter.dateFormat = @"MMMM d, yyyy";
     self.monthDayYearDateFormatter = dateFormatter;
-    [dateFormatter release];    
     
 }
 
 
 - (void)setCalendar:(NSCalendar *)cal{
 
-    [cal retain];
-    [_calendar autorelease];
     _calendar = cal;
     
     [self createFormatters];
 
 }
 
-- (void)dealloc {
-
-    [_calendar release];
-    _calendar = nil;
-
-    [_dayOfWeekDateFormatter release];
-    _dayOfWeekDateFormatter = nil;
-    [_monthDayDateFormatter release];
-    _monthDayDateFormatter = nil;
-    [_monthDayYearDateFormatter release];
-    _monthDayYearDateFormatter = nil;
-    
-    [_dateFormattter release];
-    _dateFormattter = nil;
-    
-    [_lastDate release];
-    
-    [super dealloc];
-    
-}
 
 - (void)captureTableViewAndScrollBar {
     
@@ -350,11 +316,10 @@
     
     if (_lastDate) {
         
-        [_lastDate release];
         _lastDate = nil;
     }
     
-    _lastDate = [date retain];
+    _lastDate = date;
     
     
     CGRect backgroundFrame;
@@ -444,22 +409,26 @@
     CGRect selfFrame = self.frame;
     CGRect scrollBarFrame = _scrollBar.frame;
     
-    self.frame = CGRectMake(CGRectGetWidth(selfFrame) * -1.0f,
-                            (CGRectGetHeight(scrollBarFrame) / 2.0f) - (CGRectGetHeight(selfFrame) / 2.0f),
-                            CGRectGetWidth(selfFrame),
-                            CGRectGetHeight(selfFrame));
-    
-    CGPoint point = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    point = [_scrollBar convertPoint:point toView:_tableView];
-    
-    UIView *view = [_tableView hitTest:point withEvent:UIEventTypeTouches];
-    
-    if ([view.superview isKindOfClass:[UITableViewCell class]]) {
+    if (scrollBarFrame.origin.y > 0)
+    {
+        self.frame = CGRectMake(CGRectGetWidth(selfFrame) * -1.0f,
+                                (CGRectGetHeight(scrollBarFrame) / 2.0f) - (CGRectGetHeight(selfFrame) / 2.0f),
+                                CGRectGetWidth(selfFrame),
+                                CGRectGetHeight(selfFrame));
         
-        [self updateDisplayWithCell:(UITableViewCell *)view.superview];
+        CGPoint point = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        point = [_scrollBar convertPoint:point toView:_tableView];
         
+        UIView *view = [_tableView hitTest:point withEvent:nil];
+        
+        if ([view.superview isKindOfClass:[UITableViewCell class]]) {
+            
+            [self updateDisplayWithCell:(UITableViewCell *)view.superview];
+            
+        }
+    } else {
+        [self scrollViewDidEndDecelerating];
     }
-    
 }
 
 - (void)scrollViewDidEndDecelerating {
@@ -474,7 +443,6 @@
     } completion:^(BOOL finished) {
         
     }];
-    
 }
 
 
@@ -497,8 +465,6 @@
     } completion:^(BOOL finished) {
         
     }];
-    
-    
 }
 
 @end

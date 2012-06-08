@@ -20,6 +20,7 @@
     
     
 }
+
 @property (nonatomic, copy) NSDateFormatter *timeDateFormatter;
 @property (nonatomic, copy) NSDateFormatter *dayOfWeekDateFormatter;
 @property (nonatomic, copy) NSDateFormatter *monthDayDateFormatter;
@@ -143,9 +144,11 @@
     self.frame = CGRectMake(CGRectGetWidth(self.frame) - 10.0f, 0.0f, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
     
     for (id subview in [_tableView subviews]) {
+        
         if ([subview isKindOfClass:[UIImageView class]]) {
             
             UIImageView *imageView = (UIImageView *)subview;
+            
             if (imageView.frame.size.width == 7.0f) {
                 
                 imageView.clipsToBounds = NO;
@@ -155,6 +158,7 @@
             }
             
         }
+        
     }
     
 }
@@ -409,8 +413,8 @@
     CGRect selfFrame = self.frame;
     CGRect scrollBarFrame = _scrollBar.frame;
     
-    if (scrollBarFrame.origin.y > 0)
-    {
+    if (scrollBarFrame.origin.y > 0) {
+        
         self.frame = CGRectMake(CGRectGetWidth(selfFrame) * -1.0f,
                                 (CGRectGetHeight(scrollBarFrame) / 2.0f) - (CGRectGetHeight(selfFrame) / 2.0f),
                                 CGRectGetWidth(selfFrame),
@@ -426,8 +430,11 @@
             [self updateDisplayWithCell:(UITableViewCell *)view.superview];
             
         }
+        
     } else {
+        
         [self scrollViewDidEndDecelerating];
+        
     }
 }
 
@@ -438,11 +445,14 @@
     [_tableView.superview addSubview:self];
     
     [UIView animateWithDuration:0.3f delay:1.0f options:UIViewAnimationOptionBeginFromCurrentState  animations:^{
+        
         self.alpha = 0.0f;
         self.transform = CGAffineTransformMakeTranslation(10.0f, 0.0f);
+        
     } completion:^(BOOL finished) {
         
     }];
+    
 }
 
 
@@ -460,11 +470,14 @@
     [_scrollBar addSubview:self];
     
     [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState  animations:^{
+        
         self.alpha = 1.0f;
         self.transform = CGAffineTransformIdentity;
+        
     } completion:^(BOOL finished) {
         
     }];
+    
 }
 
 @end

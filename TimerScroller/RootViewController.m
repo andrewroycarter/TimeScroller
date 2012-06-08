@@ -153,6 +153,7 @@
     cell.detailTextLabel.text = [dateFormatter stringFromDate:date];
     
     return cell;
+    
 }
 
 @end

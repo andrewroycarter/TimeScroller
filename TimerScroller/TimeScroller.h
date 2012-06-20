@@ -38,6 +38,7 @@
     UIView *_hourHand;
     UIView *_minuteHand;
     NSDate *_lastDate;
+    CGSize _saved_tableview_size;
     
 }
 

@@ -28,6 +28,8 @@
 
 - (void)updateDisplayWithCell:(UITableViewCell *)cell;
 - (void)captureTableViewAndScrollBar;
+- (void)checkChanges;
+- (void)invalidate;
 
 @end
 
@@ -154,7 +156,7 @@
                 imageView.clipsToBounds = NO;
                 [imageView addSubview:self];
                 _scrollBar = imageView;
-                
+                _saved_tableview_size = _tableView.frame.size;
             }
             
         }
@@ -409,6 +411,10 @@
         [self captureTableViewAndScrollBar];
         
     }
+
+    [self checkChanges];
+    if (!_scrollBar)
+        return;
     
     CGRect selfFrame = self.frame;
     CGRect scrollBarFrame = _scrollBar.frame;
@@ -433,6 +439,9 @@
 
 - (void)scrollViewDidEndDecelerating {
     
+    if (!_scrollBar)
+        return;
+    
     CGRect newFrame = [_scrollBar convertRect:self.frame toView:_tableView.superview];
     self.frame = newFrame;
     [_tableView.superview addSubview:self];
@@ -450,6 +459,15 @@
 
 
 - (void)scrollViewWillBeginDragging {
+    
+    if (!_tableView || !_scrollBar) {
+        
+        [self captureTableViewAndScrollBar];
+        
+    }
+    
+    if (!_scrollBar)
+        return;
     
     CGRect selfFrame = self.frame;
     CGRect scrollBarFrame = _scrollBar.frame;
@@ -471,6 +489,24 @@
         
     }];
     
+}
+
+
+- (void)invalidate
+{
+    _tableView = nil;
+    _scrollBar = nil;
+    [self removeFromSuperview];
+}
+
+
+- (void)checkChanges
+{
+    if (!_tableView ||
+        _saved_tableview_size.height != _tableView.frame.size.height ||
+        _saved_tableview_size.width != _tableView.frame.size.width) {
+        [self invalidate];
+    }
 }
 
 @end

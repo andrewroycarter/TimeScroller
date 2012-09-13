@@ -419,22 +419,26 @@
     CGRect selfFrame = self.frame;
     CGRect scrollBarFrame = _scrollBar.frame;
     
-    self.frame = CGRectMake(CGRectGetWidth(selfFrame) * -1.0f,
-                            (CGRectGetHeight(scrollBarFrame) / 2.0f) - (CGRectGetHeight(selfFrame) / 2.0f),
-                            CGRectGetWidth(selfFrame),
-                            CGRectGetHeight(selfFrame));
-    
-    CGPoint point = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    point = [_scrollBar convertPoint:point toView:_tableView];
-    
-    UIView *view = [_tableView hitTest:point withEvent:nil];
-    
-    if ([view.superview isKindOfClass:[UITableViewCell class]]) {
+    if (scrollBarFrame.origin.y > 0)
+    {
+        self.frame = CGRectMake(CGRectGetWidth(selfFrame) * -1.0f,
+                                (CGRectGetHeight(scrollBarFrame) / 2.0f) - (CGRectGetHeight(selfFrame) / 2.0f),
+                                CGRectGetWidth(selfFrame),
+                                CGRectGetHeight(_backgroundView.frame));
         
-        [self updateDisplayWithCell:(UITableViewCell *)view.superview];
+        CGPoint point = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        point = [_scrollBar convertPoint:point toView:_tableView];
         
+        UIView *view = [_tableView hitTest:point withEvent:nil];
+        
+        if ([view.superview isKindOfClass:[UITableViewCell class]]) {
+            
+            [self updateDisplayWithCell:(UITableViewCell *)view.superview];
+            
+        }
+    } else {
+        [self scrollViewDidEndDecelerating];
     }
-    
 }
 
 - (void)scrollViewDidEndDecelerating {

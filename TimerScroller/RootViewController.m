@@ -28,7 +28,7 @@
         for (int i = todayComponents.day; i >= -15; i--) {
             
             NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-            [dictionary setObject:@"Title here" forKey:@"title"];
+            dictionary[@"title"] = @"Title here";
             
             components.year = todayComponents.year;
             components.month = todayComponents.month;
@@ -37,7 +37,7 @@
             components.minute = arc4random() % 59;
             
             NSDate *date = [calendar dateFromComponents:components];
-            [dictionary setObject:date forKey:@"date"];
+            dictionary[@"date"] = date;
             
             [_datasource addObject:dictionary];
             
@@ -84,8 +84,8 @@
 - (NSDate *)dateForCell:(UITableViewCell *)cell {
     
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
-    NSDictionary *dictionary = [_datasource objectAtIndex:indexPath.row];
-    NSDate *date = [dictionary objectForKey:@"date"];
+    NSDictionary *dictionary = _datasource[indexPath.row];
+    NSDate *date = dictionary[@"date"];
     
     return date;
     
@@ -149,11 +149,11 @@
     
     }
     
-    NSDictionary *dictionary = [_datasource objectAtIndex:indexPath.row];
-    NSString *title = [dictionary objectForKey:@"title"];
+    NSDictionary *dictionary = _datasource[indexPath.row];
+    NSString *title = dictionary[@"title"];
     cell.textLabel.text = title;
     
-    NSDate *date = [dictionary objectForKey:@"date"];
+    NSDate *date = dictionary[@"date"];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterShortStyle];
     cell.detailTextLabel.text = [dateFormatter stringFromDate:date];

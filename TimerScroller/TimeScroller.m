@@ -146,11 +146,13 @@
 {
     NSDate *date = [self.delegate dateForCell:cell];
     
-    if ([date isEqualToDate:_lastDate])
+    if (!date || [date isEqualToDate:_lastDate])
     {
         return;
     }
-    
+    if (!_lastDate) {
+        _lastDate=[NSDate date];
+    }
     NSDate *today = [NSDate date];
     
     NSDateComponents *dateComponents = [self.calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekOfYearCalendarUnit | NSWeekCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:date];

@@ -398,7 +398,9 @@
     point = [_scrollBar convertPoint:point toView:_tableView];
     
     UIView *view = [_tableView hitTest:point withEvent:nil];
-    
+    while (view.superview && ![view.superview isKindOfClass:[UITableViewCell class]]) {
+        view = view.superview;
+    }
     if ([view.superview isKindOfClass:[UITableViewCell class]])
     {
         [self updateDisplayWithCell:(UITableViewCell *)view.superview];

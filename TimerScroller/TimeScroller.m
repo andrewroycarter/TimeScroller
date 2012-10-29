@@ -397,11 +397,9 @@
     CGPoint point = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     point = [_scrollBar convertPoint:point toView:_tableView];
     
-    UIView *view = [_tableView hitTest:point withEvent:nil];
-    
-    if ([view.superview isKindOfClass:[UITableViewCell class]])
-    {
-        [self updateDisplayWithCell:(UITableViewCell *)view.superview];
+    UITableViewCell* cell=[_tableView cellForRowAtIndexPath:[_tableView indexPathForRowAtPoint:point]];
+    if (cell) {
+        [self updateDisplayWithCell:cell];
         if (![self alpha])
         {
             [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{

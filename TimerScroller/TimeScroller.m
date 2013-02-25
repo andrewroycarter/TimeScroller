@@ -32,7 +32,7 @@
 {
     UIImage *background = [[UIImage imageNamed:@"TimeScroller.bundle/timescroll_pointer"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0f, 35.0f, 0.0f, 10.0f)];
     
-    self = [super initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, background.size.height)];
+    self = [super initWithFrame:CGRectMake(0.0f, 2.0f, 320.0f, background.size.height)];
     if (self)
     {
         self.calendar = [NSCalendar currentCalendar];
@@ -41,8 +41,8 @@
         self.alpha = 0.0f;
         self.transform = CGAffineTransformMakeTranslation(10.0f, 0.0f);
         
-        _backgroundView = [[UIImageView alloc] initWithImage:background];
-        _backgroundView.frame = CGRectMake(CGRectGetWidth(self.frame) - 80.0f, 0.0f, 80.0f, CGRectGetHeight(self.frame));
+        _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) - 80.0f, 0.0f, 80.0f, CGRectGetHeight(self.frame))];
+        _backgroundView.layer.contents = (id)background.CGImage;
         [self addSubview:_backgroundView];
         
         _handContainer = [[UIView alloc] initWithFrame:CGRectMake(5.0f, 4.0f, 20.0f, 20.0f)];
@@ -391,10 +391,10 @@
     CGRect selfFrame = self.frame;
     CGRect scrollBarFrame = _scrollBar.frame;
     
-    self.frame = CGRectMake(CGRectGetWidth(selfFrame) * -1.0f,
+    self.frame = CGRectIntegral(CGRectMake(CGRectGetWidth(selfFrame) * -1.0f,
                             (CGRectGetHeight(scrollBarFrame) / 2.0f) - (CGRectGetHeight(selfFrame) / 2.0f),
                             CGRectGetWidth(selfFrame),
-                            CGRectGetHeight(_backgroundView.frame));
+                            CGRectGetHeight(_backgroundView.frame)));
     
     CGPoint point = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     point = [_scrollBar convertPoint:point toView:_tableView];

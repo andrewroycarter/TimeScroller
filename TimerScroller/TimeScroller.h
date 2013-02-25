@@ -33,7 +33,7 @@
     UIImageView *_scrollBar;
     UILabel *_timeLabel;
     UILabel *_dateLabel;
-    UIImageView *_backgroundView;
+    UIView *_backgroundView;
     UIView *_handContainer;
     UIView *_hourHand;
     UIView *_minuteHand;

@@ -401,9 +401,11 @@
     
     CGRect selfFrame = self.frame;
     CGRect scrollBarFrame = _scrollBar.frame;
-    
+    CGFloat moveingDistance = _tableView.contentSize.height - _scrollBar.frame.size.height;
+    CGFloat ratio = _scrollBar.frame.origin.y / moveingDistance;
+
     self.frame = CGRectMake(CGRectGetWidth(selfFrame) * -1.0f,
-                            (CGRectGetHeight(scrollBarFrame) / 2.0f) - (CGRectGetHeight(selfFrame) / 2.0f),
+                            (CGRectGetHeight(scrollBarFrame) - CGRectGetHeight(selfFrame)) * ratio,
                             CGRectGetWidth(selfFrame),
                             CGRectGetHeight(_backgroundView.frame));
     
@@ -465,10 +467,11 @@
     
     CGRect selfFrame = self.frame;
     CGRect scrollBarFrame = _scrollBar.frame;
-    
-    
+    CGFloat moveingDistance = _tableView.contentSize.height - _scrollBar.frame.size.height;
+    CGFloat ratio = _scrollBar.frame.origin.y / moveingDistance;
+
     self.frame = CGRectIntegral(CGRectMake(CGRectGetWidth(selfFrame) * -1.0f,
-                                           (CGRectGetHeight(scrollBarFrame) / 2.0f) - (CGRectGetHeight(selfFrame) / 2.0f),
+                                           (CGRectGetHeight(scrollBarFrame) - CGRectGetHeight(selfFrame)) * ratio,
                                            CGRectGetWidth(selfFrame),
                                            CGRectGetHeight(selfFrame)));
     

@@ -142,7 +142,8 @@
         {
             UIImageView *imageView = (UIImageView *)subview;
             
-            if (imageView.frame.size.width == 7.0f)
+            CGFloat scrollBarWidth = [[UIDevice currentDevice].systemVersion floatValue] >= 7.0f ? 3.5f : 7.0f;
+            if (imageView.frame.size.width == scrollBarWidth)
             {
                 imageView.clipsToBounds = NO;
                 [imageView addSubview:self];

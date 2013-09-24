@@ -142,7 +142,7 @@
         {
             UIImageView *imageView = (UIImageView *)subview;
             
-            if (imageView.frame.size.width == 7.0f)
+            if (imageView.frame.size.width == 7.0f || imageView.frame.size.width == 3.5f)
             {
                 imageView.clipsToBounds = NO;
                 [imageView addSubview:self];

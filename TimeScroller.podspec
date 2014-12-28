@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/andrewroycarter/TimeScroller"
   s.license      = 'MIT'
   s.author       = { "Andrew Carter" => "andrew.r.carter@gmail.com" }
-  s.source       = { :git => "https://github.com/andrewroycarter/TimeScroller.git", :tag => '2.0.1' }
+  s.source       = { :git => "https://github.com/andrewroycarter/TimeScroller.git", :tag => '2.0.2' }
   s.source_files = 'ACTimeScroller'
   s.resources    = 'Assets/*'
   s.frameworks   = 'QuartzCore', 'UIKit'

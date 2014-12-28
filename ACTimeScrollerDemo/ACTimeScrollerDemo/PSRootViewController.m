@@ -51,7 +51,7 @@ NSString * const PSTableViewCellIdentifier = @"PSTableViewCellIdentifier";
     NSDate *today = [NSDate date];
     NSDateComponents *todayComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:today];
     
-    for (int i = [todayComponents day]; i >= -15; i--)
+    for (NSInteger i = [todayComponents day]; i >= -15; i--)
     {
         [components setYear:[todayComponents year]];
         [components setMonth:[todayComponents month]];

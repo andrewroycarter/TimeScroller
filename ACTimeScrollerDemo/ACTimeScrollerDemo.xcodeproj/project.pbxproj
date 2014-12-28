@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		222DA1021A50CF0D006331F1 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 222DA1011A50CF0D006331F1 /* Launch Screen.xib */; };
 		229FB19A172DD63F0059FAFB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 229FB199172DD63F0059FAFB /* UIKit.framework */; };
 		229FB19C172DD63F0059FAFB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 229FB19B172DD63F0059FAFB /* Foundation.framework */; };
 		229FB19E172DD6400059FAFB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 229FB19D172DD6400059FAFB /* CoreGraphics.framework */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		222DA1011A50CF0D006331F1 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		229FB196172DD63F0059FAFB /* ACTimeScrollerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACTimeScrollerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		229FB199172DD63F0059FAFB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		229FB19B172DD63F0059FAFB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -69,6 +71,7 @@
 		229FB18D172DD63F0059FAFB = {
 			isa = PBXGroup;
 			children = (
+				222DA1011A50CF0D006331F1 /* Launch Screen.xib */,
 				229FB19F172DD6400059FAFB /* ACTimeScrollerDemo */,
 				229FB198172DD63F0059FAFB /* Frameworks */,
 				229FB197172DD63F0059FAFB /* Products */,
@@ -218,6 +221,7 @@
 				229FB1AE172DD6400059FAFB /* Default@2x.png in Resources */,
 				229FB1B0172DD6400059FAFB /* Default-568h@2x.png in Resources */,
 				229FB1C3172DD6770059FAFB /* timescroll_hourhand.png in Resources */,
+				222DA1021A50CF0D006331F1 /* Launch Screen.xib in Resources */,
 				229FB1C4172DD6770059FAFB /* timescroll_hourhand@2x.png in Resources */,
 				229FB1C5172DD6770059FAFB /* timescroll_minutehand.png in Resources */,
 				229FB1C6172DD6770059FAFB /* timescroll_minutehand@2x.png in Resources */,
@@ -351,6 +355,7 @@
 				229FB1B5172DD6400059FAFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

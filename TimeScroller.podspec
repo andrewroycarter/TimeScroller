@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TimeScroller"
-  s.version      = "2.0.1"
+  s.version      = "2.0.2"
   s.summary      = "A UI Element that hovers beside the scroll bar of a UITableView (Mimicking the Path app)."
   s.homepage     = "https://github.com/andrewroycarter/TimeScroller"
   s.license      = 'MIT'
